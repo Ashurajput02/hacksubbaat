@@ -1,0 +1,18 @@
+{
+  "kind": "singleType",
+  "collectionName": "app_fonts",
+  "info": {
+    "singularName": "app-font",
+    "pluralName": "app-fonts",
+    "displayName": "App Font"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string"
+    }
+  }
+}

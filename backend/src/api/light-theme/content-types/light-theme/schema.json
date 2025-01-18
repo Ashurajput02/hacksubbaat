@@ -1,0 +1,34 @@
+{
+  "kind": "singleType",
+  "collectionName": "light_themes",
+  "info": {
+    "singularName": "light-theme",
+    "pluralName": "light-themes",
+    "displayName": "LightTheme",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "primary": {
+      "type": "string"
+    },
+    "surface": {
+      "type": "string"
+    },
+    "surfaceContainer": {
+      "type": "string"
+    },
+    "onSurface": {
+      "type": "string"
+    },
+    "onSurfaceVariant": {
+      "type": "string"
+    },
+    "onPrimary": {
+      "type": "string"
+    }
+  }
+}

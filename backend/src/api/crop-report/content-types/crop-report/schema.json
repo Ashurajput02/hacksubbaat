@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "crop_reports",
+  "info": {
+    "singularName": "crop-report",
+    "pluralName": "crop-reports",
+    "displayName": "Crop Report",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "CropType": {
+      "type": "string"
+    },
+    "FarmerName": {
+      "type": "string"
+    },
+    "Disease": {
+      "type": "string"
+    },
+    "Course": {
+      "type": "string"
+    },
+    "doctor": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::doctor.doctor",
+      "inversedBy": "crop_reports"
+    },
+    "feedbacks": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::feedback.feedback",
+      "mappedBy": "crop_report"
+    }
+  }
+}

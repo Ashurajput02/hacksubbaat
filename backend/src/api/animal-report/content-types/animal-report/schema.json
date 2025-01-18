@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "animal_reports",
+  "info": {
+    "singularName": "animal-report",
+    "pluralName": "animal-reports",
+    "displayName": "Animal Report",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "AnimalType": {
+      "type": "string"
+    },
+    "FarmerName": {
+      "type": "string"
+    },
+    "Disease": {
+      "type": "string"
+    },
+    "Course": {
+      "type": "integer"
+    },
+    "doctor": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::doctor.doctor",
+      "inversedBy": "animal_reports"
+    },
+    "feedbacks": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::feedback.feedback"
+    }
+  }
+}

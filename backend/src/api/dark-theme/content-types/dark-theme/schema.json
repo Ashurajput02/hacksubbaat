@@ -1,0 +1,33 @@
+{
+  "kind": "singleType",
+  "collectionName": "dark_themes",
+  "info": {
+    "singularName": "dark-theme",
+    "pluralName": "dark-themes",
+    "displayName": "DarkTheme"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "primary": {
+      "type": "string"
+    },
+    "surface": {
+      "type": "string"
+    },
+    "surfaceContainer": {
+      "type": "string"
+    },
+    "onSurface": {
+      "type": "string"
+    },
+    "onSurfaceVariant": {
+      "type": "string"
+    },
+    "onPrimary": {
+      "type": "string"
+    }
+  }
+}

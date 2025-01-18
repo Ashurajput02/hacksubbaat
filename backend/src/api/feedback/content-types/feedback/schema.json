@@ -1,0 +1,50 @@
+{
+  "kind": "collectionType",
+  "collectionName": "feedbacks",
+  "info": {
+    "singularName": "feedback",
+    "pluralName": "feedbacks",
+    "displayName": "Feedback"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Week": {
+      "type": "integer"
+    },
+    "feedback": {
+      "type": "text"
+    },
+    "audio": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "Image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    },
+    "prescription": {
+      "type": "text"
+    },
+    "crop_report": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::crop-report.crop-report",
+      "inversedBy": "feedbacks"
+    }
+  }
+}

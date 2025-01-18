@@ -1,0 +1,55 @@
+{
+  "kind": "collectionType",
+  "collectionName": "doctors",
+  "info": {
+    "singularName": "doctor",
+    "pluralName": "doctors",
+    "displayName": "Doctor"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string"
+    },
+    "Speciality": {
+      "type": "string"
+    },
+    "Degree": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "isFemale": {
+      "type": "boolean"
+    },
+    "Times": {
+      "type": "json"
+    },
+    "crop_reports": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::crop-report.crop-report",
+      "mappedBy": "doctor"
+    },
+    "animal_reports": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::animal-report.animal-report",
+      "mappedBy": "doctor"
+    },
+    "requests": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::request.request",
+      "mappedBy": "doctor"
+    }
+  }
+}
