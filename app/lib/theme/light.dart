@@ -17,4 +17,5 @@ ThemeData lightmode = ThemeData(
       surfaceContainer: stringToColor(theme['surfaceContainer']),
       primary: stringToColor(theme['primary']),
       onSurface: stringToColor(theme['onSurface']),
-      onSurfaceVariant: stringToColor(theme['onSurfaceVariant'])));
+      onSurfaceVariant: stringToColor(theme['onSurfaceVariant']),
+      onPrimary: stringToColor(theme['onPrimary'])));

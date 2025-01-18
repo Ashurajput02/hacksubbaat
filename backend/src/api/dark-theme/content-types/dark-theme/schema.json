@@ -4,10 +4,11 @@
   "info": {
     "singularName": "dark-theme",
     "pluralName": "dark-themes",
-    "displayName": "DarkTheme"
+    "displayName": "DarkTheme",
+    "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {

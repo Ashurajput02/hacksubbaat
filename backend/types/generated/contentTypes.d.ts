@@ -469,12 +469,13 @@ export interface ApiCropReportCropReport extends Struct.CollectionTypeSchema {
 export interface ApiDarkThemeDarkTheme extends Struct.SingleTypeSchema {
   collectionName: 'dark_themes';
   info: {
+    description: '';
     displayName: 'DarkTheme';
     pluralName: 'dark-themes';
     singularName: 'dark-theme';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     createdAt: Schema.Attribute.DateTime;
