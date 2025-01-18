@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "schemes",
+  "info": {
+    "singularName": "scheme",
+    "pluralName": "schemes",
+    "displayName": "scheme",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "url": {
+      "type": "string"
+    },
+    "Image": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}

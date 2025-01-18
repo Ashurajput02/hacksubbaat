@@ -1,5 +1,5 @@
-import 'package:devsync/components/primaryButton.dart';
-import 'package:devsync/services/userApiService.dart';
+import '/components/primaryButton.dart';
+import '/services/userApiService.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -18,49 +18,31 @@ class _LoginState extends State<Login> {
   bool _obscureText = true;
   final box = Hive.box('appBox');
   bool validateEmail(String email) {
-    var box = Hive.box('appBox');
-    List<dynamic> colleges = box.get('College') ?? [];
-
-    for (var college in colleges) {
-      String pattern = college['EmailRegex'];
-      RegExp regex = RegExp(pattern);
-      if (regex.hasMatch(email)) {
-        return true;
-      }
-    }
-    return false;
+    String pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
+    RegExp regex = RegExp(pattern);
+    return regex.hasMatch(email);
   }
 
   void onLoginPressed() {
     setState(() {
       isEmailValid = validateEmail(emailController.text);
-      emailErrorText =
-          isEmailValid ? '' : 'Please login via your college email';
+      emailErrorText = isEmailValid ? '' : 'Please login via valid email';
     });
 
     if (isEmailValid && emailController.text.isNotEmpty) {
       var reponse = UserApiService.loginUser(
           emailController.text, passwordController.text);
       reponse.then((user) {
-        var response2 = UserApiService.getUser(emailController.text);
-        response2.then((user2) {
-          Map<String, dynamic> userData = {
+        Map<String, dynamic> userData = {
           'username': user['user']['username'],
           'email': user['user']['email'],
           'name': user['user']['Name'],
-          'profilePicture': user['user']['profilePicture'],
-          'bio': user['user']['Bio'],
-          'skills': user['user']['Skills'],
-          'year': user['user']['Year'],
+          'phone': user['user']['Phone'],
+          'isFarmer': user['user']['isFarmer'],
           'gender': user['user']['Gender'],
-          'isOpenToTeams': user['user']['isOpenToTeams'],
-          'college': user2[0]['college']['Name'],
         };
         box.put('userData', userData);
-        }).catchError((error) {
-          print('Error: $error');
-        });
-
+        Navigator.pushReplacementNamed(context, '/home');
       }).catchError((error) {
         print('Error: $error');
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -90,28 +72,15 @@ class _LoginState extends State<Login> {
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
-          Stack(
-            children: [
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  height: screenHeight * 0.4,
-                  width: screenWidth,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
+          Container(
+            width: screenWidth,
+            height: screenHeight,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/backgrounds/Startup.png'),
+                fit: BoxFit.cover,
               ),
-              Container(
-                width: screenWidth,
-                height: screenHeight * 0.72,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.surface,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(screenWidth * 0.05),
-                    bottomRight: Radius.circular(screenWidth * 0.05),
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
           Column(
             children: [
@@ -144,7 +113,7 @@ class _LoginState extends State<Login> {
                           child: Padding(
                             padding: EdgeInsets.only(left: screenWidth * 0.05),
                             child: Text(
-                              "Welcome Back!",
+                              "Welcome",
                               style: TextStyle(
                                 color: Theme.of(context).colorScheme.primary,
                                 fontSize: screenWidth * 0.05,
@@ -262,7 +231,8 @@ class _LoginState extends State<Login> {
                             ),
                             TextButton(
                               onPressed: () {
-                                Navigator.pushReplacementNamed(context, '/register');
+                                Navigator.pushReplacementNamed(
+                                    context, '/register');
                               },
                               child: Text(
                                 'Register',
@@ -280,11 +250,6 @@ class _LoginState extends State<Login> {
                 ),
               ),
               const Spacer(),
-              Image.asset(
-                'assets/icons/CRISPR_white.png',
-                width: screenWidth * 0.25,
-              ),
-              SizedBox(height: screenHeight * 0.07),
             ],
           ),
         ],

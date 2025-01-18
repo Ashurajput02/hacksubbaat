@@ -1,5 +1,5 @@
-import 'package:devsync/components/primaryButton.dart';
-import 'package:devsync/services/userApiService.dart';
+import '/components/primaryButton.dart';
+import '/services/userApiService.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -13,47 +13,50 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
   bool isEmailValid = true;
   String emailErrorText = '';
+  bool isPhoneValid = true;
+  String phoneErrorText = '';
   bool _obscureText = true;
+  final box = Hive.box('appBox');
 
   bool validateEmail(String email) {
-    var box = Hive.box('appBox');
-    List<dynamic> colleges = box.get('College') ?? [];
-    for (var college in colleges) {
-      String pattern = college['EmailRegex'];
-      RegExp regex = RegExp(pattern);
-      if (regex.hasMatch(email)) {
-        return true;
-      }
-    }
-    return false;
+    String pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
+    RegExp regex = RegExp(pattern);
+    return regex.hasMatch(email);
+  }
+
+  bool validatePhone(String phone) {
+    String pattern = r'^\d{10}$';
+    RegExp regex = RegExp(pattern);
+    return regex.hasMatch(phone);
   }
 
   void onRegisterPressed() {
     setState(() {
       isEmailValid = validateEmail(emailController.text);
-      emailErrorText =
-          isEmailValid ? '' : 'Please login via your college email';
+      emailErrorText = isEmailValid ? '' : 'Please enter a valid email';
+      isPhoneValid = validatePhone(phoneController.text);
+      phoneErrorText = isPhoneValid ? '' : 'Please enter a valid 10-digit phone number';
     });
 
-    if (isEmailValid && emailController.text.isNotEmpty) {
-      var reponse = UserApiService.getUser(emailController.text);
-      reponse.then((user) {
+    if (isEmailValid && isPhoneValid && emailController.text.isNotEmpty) {
+      var response = UserApiService.getUser(emailController.text);
+      response.then((user) {
         if (user.isEmpty) {
-            Navigator.pushReplacementNamed(
-              context, 
-              '/registerDetails', 
-                arguments: {
-                'email': emailController.text, 
-                'password': passwordController.text
-                }
-            );
+          Navigator.pushReplacementNamed(context, '/registerDetails',
+              arguments: {
+                'email': emailController.text,
+                'password': passwordController.text,
+                'name': nameController.text,
+                'phone': phoneController.text
+              });
         } else {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text('User already exists',
-                style:
-                    TextStyle(color: Theme.of(context).colorScheme.onSurface)),
+                style: TextStyle(color: Theme.of(context).colorScheme.onSurface)),
             backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
           ));
         }
@@ -72,11 +75,11 @@ class _RegisterState extends State<Register> {
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
+    nameController.dispose();
+    phoneController.dispose();
     super.dispose();
   }
 
-  @override
-  @override
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -86,28 +89,15 @@ class _RegisterState extends State<Register> {
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
-          Stack(
-            children: [
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  height: screenHeight * 0.4,
-                  width: screenWidth,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
+          Container(
+            width: screenWidth,
+            height: screenHeight,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/backgrounds/Startup.png'),
+                fit: BoxFit.cover,
               ),
-              Container(
-                width: screenWidth,
-                height: screenHeight * 0.72,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.surface,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(screenWidth * 0.05),
-                    bottomRight: Radius.circular(screenWidth * 0.05),
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
           Column(
             children: [
@@ -140,7 +130,7 @@ class _RegisterState extends State<Register> {
                           child: Padding(
                             padding: EdgeInsets.only(left: screenWidth * 0.05),
                             child: Text(
-                              "Welcome to DevSync!",
+                              "Welcome",
                               style: TextStyle(
                                 color: Theme.of(context).colorScheme.primary,
                                 fontSize: screenWidth * 0.05,
@@ -149,6 +139,70 @@ class _RegisterState extends State<Register> {
                             ),
                           ),
                         ),
+                        SizedBox(height: screenHeight * 0.02),
+                        Container(
+                          width: screenWidth * 0.8,
+                          height: screenHeight * 0.07,
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.circular(screenWidth * 0.1),
+                          ),
+                          child: TextField(
+                            controller: nameController,
+                            decoration: InputDecoration(
+                              hintText: 'Name',
+                              hintStyle: TextStyle(
+                                color: Theme.of(context).colorScheme.onSurface,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.circular(screenWidth * 0.1),
+                              ),
+                              prefixIcon: Icon(
+                                Icons.person,
+                                color: Theme.of(context).colorScheme.onSurface,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: screenHeight * 0.02),
+                        Container(
+                          width: screenWidth * 0.8,
+                          height: screenHeight * 0.07,
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.circular(screenWidth * 0.1),
+                          ),
+                          child: TextField(
+                            controller: phoneController,
+                            decoration: InputDecoration(
+                              hintText: 'Phone Number',
+                              hintStyle: TextStyle(
+                                color: Theme.of(context).colorScheme.onSurface,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.circular(screenWidth * 0.1),
+                              ),
+                              prefixIcon: Icon(
+                                Icons.phone,
+                                color: Theme.of(context).colorScheme.onSurface,
+                              ),
+                            ),
+                          ),
+                        ),
+                        if (!isPhoneValid)
+                          Container(
+                            width: screenWidth * 0.8,
+                            padding: EdgeInsets.only(left: screenWidth * 0.05),
+                            child: Text(
+                              phoneErrorText,
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.error,
+                                fontSize: screenWidth * 0.03,
+                              ),
+                            ),
+                          ),
                         SizedBox(height: screenHeight * 0.02),
                         Container(
                           width: screenWidth * 0.8,
@@ -256,7 +310,8 @@ class _RegisterState extends State<Register> {
                             ),
                             TextButton(
                               onPressed: () {
-                                Navigator.pushReplacementNamed(context, '/login');
+                                Navigator.pushReplacementNamed(
+                                    context, '/login');
                               },
                               child: Text(
                                 'Sign In',
@@ -274,11 +329,6 @@ class _RegisterState extends State<Register> {
                 ),
               ),
               const Spacer(),
-              Image.asset(
-                'assets/icons/CRISPR_white.png',
-                width: screenWidth * 0.25,
-              ),
-              SizedBox(height: screenHeight * 0.07),
             ],
           ),
         ],

@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart' as DotEnv;
 import 'package:http/http.dart' as http;
 
@@ -36,37 +35,36 @@ class UserApiService {
   }
 
   static Future<dynamic> createUser(
-      String name, String email,String username, String password, Image profilePicture, String bio, List<String> skills, int year, String gender,
-      bool isOpenToTeams, String college) async {
+      String name, String email, String username, String password, bool isFarmer, String phone, String gender,) async {
     try {
       var uri = Uri.http(server_url, '/api/auth/local/register');
+      var requestBody = json.encode({
+        'email': email,
+        'username': username, // Use provided username instead of email
+        'password': password,
+        'isFarmer': isFarmer, // lowercase field name
+        'Phone': phone, // lowercase field name
+        'Gender': gender, // lowercase field name
+        'Name': name, // lowercase field name
+      });
       var response = await client.post(
         uri,
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
         },
-        body: json.encode({
-          'name': name,
-          'email': email,
-          'username': email,
-          'password': password,
-          'profilePicture': profilePicture,
-          'Bio': bio,
-          'Skills': skills,
-          'Year': year,
-          'Gender': gender,
-          'isOpenToTeams': isOpenToTeams,
-          'College': college,
-        }),
+        body: requestBody,
       );
+
+
       if (response.statusCode == 200) {
         return json.decode(response.body);
       } else {
-        throw Exception('Error creating user: ${response.body}');
+        var errorData = json.decode(response.body);
+        throw Exception(errorData['error']['message'] ?? 'Registration failed');
       }
     } catch (e) {
-      throw Exception('Error creating user: $e');
+      throw Exception('Registration failed: ${e.toString()}');
     }
   }
 

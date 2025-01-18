@@ -1,5 +1,5 @@
-
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:piwot2/services/weatherApiService.dart';
 import 'varApiService.dart';
 
 class DataSyncService {
@@ -29,7 +29,7 @@ class DataSyncService {
     }
   }
 
-    Future<void> syncDarkTheme() async {
+  Future<void> syncDarkTheme() async {
     try {
       var lightTheme = await VarApiService.getDarkTheme();
       var values = Map.from(lightTheme['data']);
@@ -44,30 +44,36 @@ class DataSyncService {
     }
   }
 
-  Future<void> syncCollege() async {
+  Future<void> syncSchemes() async {
     try {
-      var college = await VarApiService.getCollege();
-      var colleges = college['data'] as List;
-      var values = colleges.map((college) {
-        var value = Map.from(college);
-        value.remove('id');
-        value.remove('documentId');
-        value.remove('createdAt');
-        value.remove('updatedAt');
-        value.remove('publishedAt');
-        return value;
-      }).toList();
-      box.put('College', values);
+      var schemes = await VarApiService.getSchemes();
+      var values = {};
+      for (var scheme in schemes['data']) {
+        values[scheme['url']] = scheme['Image'][0]['formats']['thumbnail']['url'];
+      }
+      box.put('schemes', values);
     } catch (e) {
-      print('Error syncing college: $e');
+      print('Error syncing schemes: $e');
     }
   }
+
+  Future<void> syncWeatherData() async {
+    try {
+      var weatherData = await WeatherApiService.fetchWeather(21.145800,79.088158);
+      box.put('Weather Data', weatherData);
+      print('Weather Data: $weatherData');
+    } catch (e) {
+      print('Error syncing weather data: $e');
+    }
+  }
+
   Future<void> syncData() async {
     try {
       await syncAppFont();
       await syncLightTheme();
       await syncDarkTheme();
-      await syncCollege();
+      await syncSchemes();
+      await syncWeatherData();
       await box.put('Data Sync', true);
     } catch (e) {
       print('Error syncing data: $e');

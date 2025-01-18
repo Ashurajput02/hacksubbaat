@@ -65,19 +65,22 @@
       "inversedBy": "users",
       "configurable": false
     },
-    "Phone": {
-      "type": "integer"
-    },
     "isFarmer": {
-      "type": "boolean"
-    },
-    "isFemale": {
       "type": "boolean"
     },
     "requests": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::request.request"
+    },
+    "Phone": {
+      "type": "string"
+    },
+    "Gender": {
+      "type": "string"
+    },
+    "Name": {
+      "type": "string"
     }
   }
 }

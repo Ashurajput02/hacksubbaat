@@ -68,9 +68,10 @@ class VarApiService {
     }
   }
 
-  static Future<dynamic> getCollege() async {
+  static Future<dynamic> getSchemes() async {
     try {
-      var uri = Uri.http(server_url, '/api/colleges');
+      var queryParams = {'populate': '*'};
+      var uri = Uri.http(server_url, '/api/schemes', queryParams);
       var response = await client.get(
         uri,
         headers: {
