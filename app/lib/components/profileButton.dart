@@ -14,7 +14,7 @@ class Profilebutton extends StatelessWidget {
 
     return ListTile(
       leading: CircleAvatar(
-          backgroundColor: Theme.of(context).colorScheme.onSurfaceVariant,
+          backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
           child:
               Icon(iconLeading, color: iconColor ?? Theme.of(context).colorScheme.primary)),
       title: Text(title,

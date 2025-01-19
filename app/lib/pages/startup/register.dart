@@ -39,7 +39,8 @@ class _RegisterState extends State<Register> {
       isEmailValid = validateEmail(emailController.text);
       emailErrorText = isEmailValid ? '' : 'Please enter a valid email';
       isPhoneValid = validatePhone(phoneController.text);
-      phoneErrorText = isPhoneValid ? '' : 'Please enter a valid 10-digit phone number';
+      phoneErrorText =
+          isPhoneValid ? '' : 'Please enter a valid 10-digit phone number';
     });
 
     if (isEmailValid && isPhoneValid && emailController.text.isNotEmpty) {
@@ -56,7 +57,8 @@ class _RegisterState extends State<Register> {
         } else {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text('User already exists',
-                style: TextStyle(color: Theme.of(context).colorScheme.onSurface)),
+                style:
+                    TextStyle(color: Theme.of(context).colorScheme.onSurface)),
             backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
           ));
         }
@@ -102,13 +104,17 @@ class _RegisterState extends State<Register> {
           Column(
             children: [
               SizedBox(height: screenHeight * 0.05),
-              Center(
-                child: Image.asset(
-                  'assets/icons/Logo.png',
-                  width: screenWidth * 0.5,
+                            Padding(
+                padding: EdgeInsets.only(top: screenWidth * 0.2),
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Image.asset(
+                    'assets/icons/appIcon.png',
+                    width: screenWidth * 0.5,
+                  ),
                 ),
               ),
-              SizedBox(height: screenHeight * 0.07),
+              SizedBox(height: screenHeight * 0.02),
               const Spacer(),
               AnimatedPadding(
                 duration: const Duration(milliseconds: 300),

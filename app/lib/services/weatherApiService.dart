@@ -17,9 +17,6 @@ class WeatherApiService {
       'q': '${latitude.toString()},${longitude.toString()}',
       'days': '7',
     });
-    print(baseUrl.toString());
-
-
     final response = await client.get(
       baseUrl,
       headers: {

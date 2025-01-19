@@ -381,22 +381,46 @@ export interface ApiAnimalReportAnimalReport
   options: {
     draftAndPublish: false;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
-    AnimalType: Schema.Attribute.String;
-    Course: Schema.Attribute.Integer;
+    AnimalType: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    Course: Schema.Attribute.Integer &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    Disease: Schema.Attribute.String;
+    Disease: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     doctor: Schema.Attribute.Relation<'manyToOne', 'api::doctor.doctor'>;
-    FarmerName: Schema.Attribute.String;
+    FarmerName: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     feedbacks: Schema.Attribute.Relation<'oneToMany', 'api::feedback.feedback'>;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::animal-report.animal-report'
-    > &
-      Schema.Attribute.Private;
+    >;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -577,6 +601,62 @@ export interface ApiFeedbackFeedback extends Struct.CollectionTypeSchema {
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     Week: Schema.Attribute.Integer;
+  };
+}
+
+export interface ApiFertilizerFertilizer extends Struct.CollectionTypeSchema {
+  collectionName: 'fertilizers';
+  info: {
+    description: '';
+    displayName: 'Fertilizer';
+    pluralName: 'fertilizers';
+    singularName: 'fertilizer';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::fertilizer.fertilizer'
+    >;
+    Name: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    Price: Schema.Attribute.Integer &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    publishedAt: Schema.Attribute.DateTime;
+    Type: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    Url: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
   };
 }
 
@@ -1204,6 +1284,7 @@ declare module '@strapi/strapi' {
       'api::dark-theme.dark-theme': ApiDarkThemeDarkTheme;
       'api::doctor.doctor': ApiDoctorDoctor;
       'api::feedback.feedback': ApiFeedbackFeedback;
+      'api::fertilizer.fertilizer': ApiFertilizerFertilizer;
       'api::light-theme.light-theme': ApiLightThemeLightTheme;
       'api::request.request': ApiRequestRequest;
       'api::scheme.scheme': ApiSchemeScheme;

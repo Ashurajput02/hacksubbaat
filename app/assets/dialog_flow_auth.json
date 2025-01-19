@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "app-management-kiql",
+  "private_key_id": "e6793c234dc5ec046134d06fafd01e4f5ef17423",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCtGsE25NoY8+WG\nItaCCRccjEG1tskZUgbKZsclrJ9xL2vHH48npKo+2QR7Furu948WUILoh1zj2tfD\n63Z1Dft6YHloIWNAA2qTdbnELXayd2/cwNWg0PlyrGcbNF0pNVzGkgTJyEHRu1Bz\neYRB9cpVuVaEy4RmCEVLGdI8QZPswsMJVMXEyTypVs2a6wPX7ETXCOZEe8zBKZNu\nwu/etYUw8bcULvwbXm8yuEi/fWeQrb1wkEJRkh4F6VyIFIOsf6pt5/G1amMorGAy\nSSP4WAhpstCriFYa7zd/7S4Gzxvg7QAgbqpI3C0ovc3hxdEo6N3d5F+1Dd+tBMZu\nG+1VO4Z1AgMBAAECggEAIKlLKn3crteaB4icO7XWYAMQxOYDpJzm/hqNWczr2pHN\nfqk0PBEkNC6DW2w0ELmyDE5NnO0peC6LBoLve1+TgwAf+CdQkDv0yHTug5bmbf7+\nIsNZq3myj1H7NFVZfJR+eFMFx0LbNGTo5ZjYfQ+QyULqkazKwuutk2GAWvEupX28\nmN347oZGHSac0+mnKOG2+bQB+DCNgkOhHVkGzpblbPSj4eZNTdOj+vQZea5Kuwf6\nShj2TJGgVnkGJIH0c2SHuSW3ReBAXohMnYUIFOsdnbYro04axkghpUGmaSDO8txT\nLJnwvhv7vE2LhmeY7oOMY39SBAl8WgoeFLzHV7z6kQKBgQDURWhsN4prymB7J3Qe\nxkRBMdcC0AD6vEBEe6SFvPJL7alEVHYlmuZcthnvcKyxKxm5yj5dYSOhYeThfENM\naZmjAddxnbE3584ObpVM8M63F4vW7CCz6BJQqwjhelDpWSFN8ejt4jzA1flfipgd\nU4pn3RyaZ41Jqpo8AF6lCNYizQKBgQDQw87U81uEdWeLwXkL4CXzvKbF0J3wQmVM\nvCZpucyp8M/rjHfw3TfzDDYUtBZw8/pSF0Tai7bVqRewv5u90nOva955SjeDSTfw\nR2ZrfW8958E8Jvxu27IkQk9kFQNF7OmkT/nHNOkmHUP7+sJE1VP3d4GhJfhnz4ou\nsp7RD34CSQKBgFj0XTY8cD2LqbLyba8X1zKa+Eetczuf+C66wc9pxwAasHx6CKjp\nqO/hQC0fQr9cGIPLRSdMtenDZG8569nxxviQpQBv3PxYn/lcTiTYJUiFDY0blvjN\noB8+DZKv94hSWaqYXcySqnMFOGPZaLWhdLbh6kKqcoMUg13xqbfvZA1hAoGBAILn\n9Z80xlNF51sMQ6H9uO6gghcSnKbWi3zVkmTDfCGn/kjeuSsRHI9MPfE3h8bmRjYJ\nn0RHTaumr1NGoxshhycdxdBaiHrLg8cojoGikwnHdDUK4UmGe6se5XeFcZr8VvmQ\nqLiQZg5fVY0BDaZp+o/3oRJyo9Q8oJJtsQa45zP5AoGAVstjUoDU5eQhyTrELidH\nK3oBOH0PuTw8XdITwS3+m96JWdTdH+fVhtomZFItwEZdbYpgDdeAzOuu6c0wJxQ1\n5Awo5SgjXqMyqYmqlEBWZ/VK7jEv/a7spZ9ehJJDINE53XQZhKuF4yC2o8IPw/ZQ\nbF/QhbaM5n5bScfgXsA6x7w=\n-----END PRIVATE KEY-----\n",
+  "client_email": "imagine2@app-management-kiql.iam.gserviceaccount.com",
+  "client_id": "103277558176984631304",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/imagine2%40app-management-kiql.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

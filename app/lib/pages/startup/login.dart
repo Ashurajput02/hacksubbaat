@@ -42,7 +42,7 @@ class _LoginState extends State<Login> {
           'gender': user['user']['Gender'],
         };
         box.put('userData', userData);
-        Navigator.pushReplacementNamed(context, '/home');
+        Navigator.pushReplacementNamed(context, '/');
       }).catchError((error) {
         print('Error: $error');
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -85,13 +85,17 @@ class _LoginState extends State<Login> {
           Column(
             children: [
               SizedBox(height: screenHeight * 0.05),
-              Center(
-                child: Image.asset(
-                  'assets/icons/Logo.png',
-                  width: screenWidth * 0.5,
+              Padding(
+                padding: EdgeInsets.only(top: screenWidth * 0.2),
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Image.asset(
+                    'assets/icons/appIcon.png',
+                    width: screenWidth * 0.5,
+                  ),
                 ),
               ),
-              SizedBox(height: screenHeight * 0.07),
+              SizedBox(height: screenHeight * 0.02),
               const Spacer(),
               AnimatedPadding(
                 duration: const Duration(milliseconds: 300),

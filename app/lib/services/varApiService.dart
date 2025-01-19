@@ -88,4 +88,24 @@ class VarApiService {
       throw Exception('Error getting user: $e');
     }
   }
+
+  static Future<dynamic> getFertilizers() async {
+    try {
+      var uri = Uri.http(server_url, '/api/fertilizers',);
+      var response = await client.get(
+        uri,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      );
+      if (response.statusCode == 200) {
+        return json.decode(response.body);
+      } else {
+        throw Exception('Error getting user: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Error getting user: $e');
+    }
+  }
 }

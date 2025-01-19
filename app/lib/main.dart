@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:piwot2/pages/home/home.dart';
 import 'package:piwot2/pages/home/profile.dart';
-import 'package:piwot2/predictor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
+import 'pages/categories/fertlizerPredictor.dart';
+import 'pages/home/chatbot.dart';
+import 'pages/home/marketplace.dart';
 import 'pages/startup/login.dart';
 import 'pages/startup/register.dart';
 import 'pages/startup/registerDetails.dart';
-import 'services/dataSyncService.dart';
 import 'theme/dark.dart';
 import 'theme/light.dart';
 import 'theme/theme_provider.dart';
@@ -23,7 +24,6 @@ void main() async {
   bool isDark = prefs.getBool('isDark') ?? false;
   await Hive.initFlutter();
   await Hive.openBox('appBox');
-  await DataSyncService().syncData(); 
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
@@ -61,9 +61,16 @@ class MyApp extends StatelessWidget {
             phone: args['phone']!,
             name: args['name']!,
           );
+          
+        },
+        '/marketplace': (context) {
+          final args = ModalRoute.of(context)!.settings.arguments as Map<String, String>;
+          return Marketplace(name: args['name']!);
         },
          '/': (context) => Home(),
          '/profile': (context) => const Profile(),
+         '/fertilizer': (context) => Fertilizer(),
+         '/chatbot': (context) => Chatbot(),
       },
     );
   }

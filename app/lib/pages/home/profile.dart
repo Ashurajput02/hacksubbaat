@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:provider/provider.dart';
-
 import '../../components/profileButton.dart';
-import '../../theme/dark.dart';
-import '../../theme/theme_provider.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -42,12 +38,12 @@ class _ProfileState extends State<Profile> {
                   backgroundColor: Theme.of(context).colorScheme.surface,
                   child: CircleAvatar(
                     radius: screenHeight * 0.048,
-                    backgroundColor: Theme.of(context).colorScheme.onSurface,
+                    backgroundColor: Theme.of(context).colorScheme.surface,
                     child: Text(
                         Hive.box('appBox')
                             .get('userData')['name'][0],
                         style: TextStyle(
-                            color: Theme.of(context).colorScheme.surface,
+                            color: Theme.of(context).colorScheme.onSurface,
                             fontSize: screenHeight * 0.03,
                             fontWeight: FontWeight.w600)),
                   ),
@@ -81,33 +77,6 @@ class _ProfileState extends State<Profile> {
             padding: EdgeInsets.only(left: screenWidth * 0.05),
             child: Column(
               children: [
-                ListTile(
-                  leading: CircleAvatar(
-                      backgroundColor:
-                          Theme.of(context).colorScheme.onSurfaceVariant,
-                      child: Icon(
-                        Provider.of<ThemeProvider>(context).themeData ==
-                                darkmode
-                            ? Icons.dark_mode
-                            : Icons.light_mode,
-                        color: Theme.of(context).colorScheme.primary,
-                      )),
-                  title: Text('Theme',
-                      style: TextStyle(
-                          color: Theme.of(context).colorScheme.onSurface,
-                          fontSize: screenHeight * 0.02,
-                          fontWeight: FontWeight.normal)),
-                  trailing: Switch(
-                    value: Provider.of<ThemeProvider>(context).themeData ==
-                        darkmode,
-                    onChanged: (value) {
-                      var provider =
-                          Provider.of<ThemeProvider>(context, listen: false);
-                      provider.toggleTheme();
-                    },
-                    activeColor: Theme.of(context).colorScheme.primary,
-                  ),
-                ),
                 Profilebutton(
                     onPressed: () {
                     

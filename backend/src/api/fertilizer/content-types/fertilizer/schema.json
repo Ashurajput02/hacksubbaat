@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "animal_reports",
+  "collectionName": "fertilizers",
   "info": {
-    "singularName": "animal-report",
-    "pluralName": "animal-reports",
-    "displayName": "Animal Report",
+    "singularName": "fertilizer",
+    "pluralName": "fertilizers",
+    "displayName": "Fertilizer",
     "description": ""
   },
   "options": {
@@ -16,7 +16,15 @@
     }
   },
   "attributes": {
-    "AnimalType": {
+    "Name": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "Type": {
       "type": "string",
       "pluginOptions": {
         "i18n": {
@@ -24,40 +32,21 @@
         }
       }
     },
-    "FarmerName": {
-      "type": "string",
+    "Url": {
+      "type": "text",
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       }
     },
-    "Disease": {
-      "type": "string",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
-    "Course": {
+    "Price": {
       "type": "integer",
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       }
-    },
-    "doctor": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::doctor.doctor",
-      "inversedBy": "animal_reports"
-    },
-    "feedbacks": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::feedback.feedback"
     }
   }
 }

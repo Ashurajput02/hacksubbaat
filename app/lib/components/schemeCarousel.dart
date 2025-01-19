@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:piwot2/components/weatherContainer.dart';
 
 class Schemecarousel extends StatefulWidget {
   const Schemecarousel({super.key});
@@ -30,17 +31,18 @@ class _SchemecarouselState extends State<Schemecarousel> {
       children: [
         if (schemes != null && schemes!.isNotEmpty)
           CarouselSlider(
-            items: schemes!.entries
-                .map((entry) => Container(
-                        child: Center(
-                          child: ClipRRect(
+            items: [
+              Weathercontainer(), // Add WeatherContainer as the first item
+              ...schemes!.entries.map((entry) => Container(
+                    child: Center(
+                      child: ClipRRect(
                         borderRadius: BorderRadius.circular(screenWidth * 0.02),
-                            child: Image.network(host +entry.value,
-                                fit: BoxFit.cover, width: screenWidth*0.8),
-                          ),
-                        ),
-                    ))
-                .toList(),
+                        child: Image.network(host + entry.value,
+                            fit: BoxFit.cover, width: screenWidth * 0.8),
+                      ),
+                    ),
+                  ))
+            ],
             options: CarouselOptions(
               autoPlay: true,
               enlargeCenterPage: true,
@@ -54,8 +56,7 @@ class _SchemecarouselState extends State<Schemecarousel> {
           ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: schemes!.entries.map((entry) {
-            int index = schemes!.keys.toList().indexOf(entry.key);
+          children: List.generate(schemes!.length + 1, (index) {
             return Container(
               width: 8.0,
               height: 8.0,
@@ -67,9 +68,10 @@ class _SchemecarouselState extends State<Schemecarousel> {
                     : Color.fromRGBO(0, 0, 0, 0.4),
               ),
             );
-          }).toList(),
+          }),
         ),
       ],
     );
   }
 }
+
